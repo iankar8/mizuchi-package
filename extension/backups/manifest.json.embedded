@@ -1,0 +1,41 @@
+{
+  "name": "InvestIQ Extension",
+  "version": "1.0.0",
+  "description": "Analyze companies with financial data and AI insights",
+  "manifest_version": 3,
+  "permissions": ["contextMenus", "activeTab", "storage", "scripting"],
+  "host_permissions": [
+    "https://financialmodelingprep.com/*", 
+    "https://api.perplexity.ai/*", 
+    "https://api.mistral.ai/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"],
+      "css": ["contentStyles.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["popup.html", "popup.js", "styles.css", "images/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

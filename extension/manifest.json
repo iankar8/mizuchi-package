@@ -1,0 +1,32 @@
+{
+  "name": "MizuchiAI",
+  "version": "1.0.0",
+  "description": "Analyze companies with financial data and AI insights",
+  "manifest_version": 3,
+  "permissions": ["contextMenus", "activeTab", "storage", "scripting", "windows", "tabs"],
+  "host_permissions": [
+    "https://financialmodelingprep.com/*", 
+    "https://api.perplexity.ai/*", 
+    "https://api.mistral.ai/*",
+    "https://app.mizuchiai.com/*",
+    "https://*.supabase.co/*",
+    "http://localhost:8081/*",
+    "https://mizuchi-fresh-kllwr2wgm-ian-kars-projects.vercel.app/*",
+    "https://mizuchi-fresh-cs9uyfold-ian-kars-projects.vercel.app/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

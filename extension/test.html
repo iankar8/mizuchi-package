@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>InvestIQ Extension Test</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f7fa;
+      color: #333;
+    }
+    h1 {
+      color: #316BFA;
+      margin-bottom: 10px;
+    }
+    .test-container {
+      display: flex;
+      gap: 20px;
+    }
+    .test-panel {
+      flex: 1;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    .debug-panel {
+      flex: 1;
+      background: #1e1e1e;
+      color: #eee;
+      border-radius: 8px;
+      padding: 15px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      height: 500px;
+      overflow: auto;
+    }
+    button {
+      background: #316BFA;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background: #2254d8;
+    }
+    .test-buttons {
+      margin: 15px 0;
+    }
+    .status {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .success {
+      background: #e6ffed;
+      border: 1px solid #34d058;
+      color: #22863a;
+    }
+    .error {
+      background: #ffeef0;
+      border: 1px solid #f97583;
+      color: #cb2431;
+    }
+    .log-entry {
+      margin-bottom: 5px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+    }
+    .test-section {
+      margin-bottom: 15px;
+    }
+    .test-section h3 {
+      margin: 10px 0;
+      color: #316BFA;
+    }
+    #log-output {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+    
+    .results-table th {
+      background-color: #f2f2f2;
+      padding: 8px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    
+    .results-table td {
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+    
+    .results-table .success {
+      background-color: rgba(0, 255, 0, 0.1);
+    }
+    
+    .results-table .failure {
+      background-color: rgba(255, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>InvestIQ Extension Test Harness</h1>
+  <p>This page simulates the Chrome extension environment to test functionality without loading into Chrome.</p>
+  
+  <div class="test-container">
+    <div class="test-panel">
+      <h2>Test Controls</h2>
+      
+      <div class="test-buttons">
+        <button id="run-tests">Run All Tests</button>
+        <button id="test-logger">Test Logger Only</button>
+        <button id="clear-logs">Clear Logs</button>
+      </div>
+      
+      <div class="test-section">
+        <h3>Manual Tests</h3>
+        <button id="test-search">Test Company Search</button>
+        <button id="test-debug-panel">Test Debug Panel</button>
+        <button id="test-api-calls">Test API Responses</button>
+        <button id="test-real-data">Test Real Data Connections</button>
+        <button id="test-sw-restoration">Test Service Worker</button>
+        <button id="test-error-handling">Test Error Handling</button>
+      </div>
+      
+      <div id="test-status" class="status"></div>
+      
+      <div class="test-section">
+        <h3>Current Storage State</h3>
+        <pre id="storage-state">No data available</pre>
+      </div>
+    </div>
+    
+    <div class="debug-panel">
+      <h2>Test Output</h2>
+      <div id="log-output"></div>
+    </div>
+  </div>
+  
+  <!-- Mock UI for debug panel testing -->
+  <div id="debug-ui" style="display: none; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 20px;">
+    <h2>Debug Panel Preview</h2>
+    <div id="debug-panel" class="debug-panel show" style="height: 300px; max-width: 600px;">
+      <div class="debug-header">
+        <h3>InvestIQ Debug</h3>
+        <div>
+          <button id="refresh-logs">Refresh</button>
+          <button id="copy-logs">Copy Logs</button>
+          <button id="close-debug">Close</button>
+        </div>
+      </div>
+      <div class="debug-content">
+        <div class="debug-section">
+          <h4>Extension Status</h4>
+          <pre id="extension-status">Loading...</pre>
+        </div>
+        <div class="debug-section">
+          <h4>Debug Logs</h4>
+          <div id="debug-logs">No logs available</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Original source files -->
+  <script src="background.js"></script>
+  <script src="popup.js"></script>
+  
+  <!-- Test harness -->
+  <script src="test-harness.js"></script>
+  <script src="service-worker-tests.js"></script>
+  
+  <script>
+    // Redirect console logs to the log output div
+    const logOutput = document.getElementById('log-output');
+    const originalConsoleLog = console.log;
+    const originalConsoleError = console.error;
+    
+    console.log = function() {
+      const args = Array.from(arguments);
+      const message = args.map(arg => 
+        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : arg
+      ).join(' ');
+      
+      const logEntry = document.createElement('div');
+      logEntry.className = 'log-entry';
+      logEntry.textContent = message;
+      logOutput.appendChild(logEntry);
+      logOutput.scrollTop = logOutput.scrollHeight;
+      
+      originalConsoleLog.apply(console, arguments);
+    };
+    
+    console.error = function() {
+      const args = Array.from(arguments);
+      const message = args.map(arg => 
+        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : arg
+      ).join(' ');
+      
+      const logEntry = document.createElement('div');
+      logEntry.className = 'log-entry error';
+      logEntry.textContent = '🔴 ERROR: ' + message;
+      logOutput.appendChild(logEntry);
+      logOutput.scrollTop = logOutput.scrollHeight;
+      
+      originalConsoleError.apply(console, arguments);
+    };
+    
+    // Manual test handlers
+    document.getElementById('clear-logs').addEventListener('click', () => {
+      logOutput.innerHTML = '';
+      console.log('Logs cleared');
+    });
+    
+    document.getElementById('test-search').addEventListener('click', async () => {
+      console.log('🔍 Testing Company Search...');
+      try {
+        window.chrome = mockChrome;
+        await window.processCompanySearch('Apple');
+        updateStorageState();
+        
+        document.getElementById('test-status').className = 'status success';
+        document.getElementById('test-status').textContent = 'Search test completed';
+      } catch (error) {
+        console.error('Search test failed:', error);
+        document.getElementById('test-status').className = 'status error';
+        document.getElementById('test-status').textContent = 'Search test failed: ' + error.message;
+      }
+    });
+    
+    document.getElementById('test-debug-panel').addEventListener('click', () => {
+      console.log('🔍 Testing Debug Panel...');
+      try {
+        document.getElementById('debug-ui').style.display = 'block';
+        
+        // Create some mock logs
+        window.chrome = mockChrome;
+        for (let i = 0; i < 5; i++) {
+          window.logDebug(`Test Log ${i+1}`, `This is test log message #${i+1}`);
+        }
+        window.logDebug('API Error', 'Failed to fetch data', true);
+        
+        // Display logs in debug panel
+        window.chrome.storage.local.get(['debugLogs'], (result) => {
+          const debugLogs = document.getElementById('debug-logs');
+          const logs = result.debugLogs || [];
+          
+          const logsHtml = logs.map(log => {
+            const timestamp = log.timestamp.substring(11, 19);
+            const cssClass = log.isError ? 'log-error' : '';
+            return `<div class="log-item ${cssClass}">
+              <span class="log-timestamp">[${timestamp}]</span>
+              <strong>${log.label}:</strong> ${log.data}
+            </div>`;
+          }).join('');
+          
+          debugLogs.innerHTML = logsHtml || 'No logs available';
+          
+          // Show extension status
+          document.getElementById('extension-status').textContent = 
+            JSON.stringify({
+              selectedCompany: 'Apple',
+              dataLoaded: true,
+              lastUpdate: Date.now()
+            }, null, 2);
+        });
+        
+        document.getElementById('test-status').className = 'status success';
+        document.getElementById('test-status').textContent = 'Debug panel displayed with test data';
+      } catch (error) {
+        console.error('Debug panel test failed:', error);
+        document.getElementById('test-status').className = 'status error';
+        document.getElementById('test-status').textContent = 'Debug panel test failed: ' + error.message;
+      }
+    });
+    
+    document.getElementById('test-api-calls').addEventListener('click', async () => {
+      console.log('🔍 Testing API Responses...');
+      try {
+        // Test individual API calls
+        const endpoints = [
+          'Search API: https://financialmodelingprep.com/api/v3/search?query=Apple',
+          'Profile API: https://financialmodelingprep.com/api/v3/profile/AAPL',
+          'Metrics API: https://financialmodelingprep.com/api/v3/key-metrics-ttm/AAPL',
+          'AI API: https://api.perplexity.ai/chat/completions'
+        ];
+        
+        for (const endpoint of endpoints) {
+          console.log(`Testing ${endpoint}...`);
+          const url = endpoint.split(': ')[1];
+          try {
+            const response = await fetch(url, {
+              method: 'GET',
+              headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await response.json();
+            console.log(`✅ ${endpoint.split(': ')[0]} response:`, data);
+          } catch (error) {
+            console.error(`❌ ${endpoint.split(': ')[0]} failed:`, error);
+          }
+        }
+        
+        document.getElementById('test-status').className = 'status success';
+        document.getElementById('test-status').textContent = 'API tests completed';
+      } catch (error) {
+        console.error('API test failed:', error);
+        document.getElementById('test-status').className = 'status error';
+        document.getElementById('test-status').textContent = 'API test failed: ' + error.message;
+      }
+    });
+    
+    // Real data connection test handler
+    document.getElementById('test-real-data').addEventListener('click', async () => {
+      console.log('🔍 Testing Real Data Connections...');
+      try {
+        // Set status to loading
+        const statusEl = document.getElementById('test-status');
+        statusEl.className = 'status';
+        statusEl.innerHTML = '<div style="display:flex;align-items:center;">Running real data connection tests... <div style="width:20px;height:20px;border:2px solid #316BFA;border-radius:50%;border-top-color:transparent;margin-left:10px;animation:spin 1s linear infinite;"></div></div>';
+        
+        // Add animation style if not already present
+        if (!document.getElementById('spin-animation')) {
+          const style = document.createElement('style');
+          style.id = 'spin-animation';
+          style.textContent = '@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }';
+          document.head.appendChild(style);
+        }
+        
+        // Create results container if it doesn't exist
+        let resultsContainer = document.getElementById('real-data-results');
+        if (!resultsContainer) {
+          resultsContainer = document.createElement('div');
+          resultsContainer.id = 'real-data-results';
+          resultsContainer.className = 'test-section';
+          resultsContainer.innerHTML = '<h3>Real Data Connection Results</h3>';
+          document.querySelector('.test-panel').appendChild(resultsContainer);
+        } else {
+          // Clear previous results
+          resultsContainer.innerHTML = '<h3>Real Data Connection Results</h3>';
+        }
+        
+        // Run the real data connection tests
+        window.chrome = mockChrome;
+        const results = await window.testRealDataConnections();
+        
+        // Create results table
+        const table = document.createElement('table');
+        table.className = 'results-table';
+        table.innerHTML = `
+          <thead>
+            <tr>
+              <th>API Endpoint</th>
+              <th>Status</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${Object.entries(results).map(([endpoint, result]) => `
+              <tr class="${result.success ? 'success' : 'failure'}">
+                <td>${endpoint}</td>
+                <td>${result.success ? '✅ Success' : '❌ Failed'}</td>
+                <td>${result.message}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        `;
+        
+        resultsContainer.appendChild(table);
+        
+        // Update status
+        const allSuccess = Object.values(results).every(result => result.success);
+        statusEl.className = `status ${allSuccess ? 'success' : 'error'}`;
+        statusEl.textContent = allSuccess ? 
+          'All real data connection tests passed successfully!' : 
+          'Some real data connection tests failed. See results table for details.';
+        
+        // Update storage state
+        updateStorageState();
+      } catch (error) {
+        console.error('Real data connection tests failed:', error);
+        document.getElementById('test-status').className = 'status error';
+        document.getElementById('test-status').textContent = 'Real data connection tests failed: ' + error.message;
+      }
+    });
+    
+    // Update storage state display
+    function updateStorageState() {
+      const storageState = document.getElementById('storage-state');
+      window.chrome.storage.local.get(null, (result) => {
+        storageState.textContent = JSON.stringify(result, null, 2);
+      });
+    }
+    
+    // Service worker test handler
+    document.getElementById('test-sw-restoration').addEventListener('click', async () => {
+      console.log('🔍 Testing Service Worker State Restoration...');
+      try {
+        window.chrome = mockChrome;
+        const result = await window.testServiceWorkerStateRestoration();
+        updateStorageState();
+        
+        document.getElementById('test-status').className = 'status ' + (result ? 'success' : 'error');
+        document.getElementById('test-status').textContent = result ? 
+          'Service worker restoration test completed successfully' : 
+          'Service worker restoration test failed';
+      } catch (error) {
+        console.error('Service worker test failed:', error);
+        document.getElementById('test-status').className = 'status error';
+        document.getElementById('test-status').textContent = 'Service worker test failed: ' + error.message;
+      }
+    });
+    
+    // Error handling test handler
+    document.getElementById('test-error-handling').addEventListener('click', async () => {
+      console.log('🔍 Testing API Error Handling...');
+      try {
+        window.chrome = mockChrome;
+        const result = await window.testAPIErrorHandling();
+        updateStorageState();
+        
+        document.getElementById('test-status').className = 'status ' + (result ? 'success' : 'error');
+        document.getElementById('test-status').textContent = result ? 
+          'Error handling test completed successfully' : 
+          'Error handling test failed';
+      } catch (error) {
+        console.error('Error handling test failed:', error);
+        document.getElementById('test-status').className = 'status error';
+        document.getElementById('test-status').textContent = 'Error handling test failed: ' + error.message;
+      }
+    });
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Test page loaded and ready');
+      updateStorageState();
+      
+      // Test button
+      document.getElementById('refresh-logs').addEventListener('click', () => {
+        console.log('Refresh logs clicked');
+      });
+      
+      document.getElementById('copy-logs').addEventListener('click', () => {
+        console.log('Copy logs clicked');
+      });
+      
+      document.getElementById('close-debug').addEventListener('click', () => {
+        document.getElementById('debug-ui').style.display = 'none';
+        console.log('Debug panel closed');
+      });
+    });
+  </script>
+</body>
+</html>

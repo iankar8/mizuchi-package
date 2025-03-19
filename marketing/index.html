@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MizuchiAI - Transform Financial Chaos into Crystal-Clear Decisions</title>
+    <meta name="description" content="MizuchiAI helps individual investors organize, analyze, and share financial research with AI-powered insights.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="../public/favicon.ico" type="image/x-icon">
+    <style>
+        .section-title, section h2, .benefits h2, .features h2, .how-it-works h2, .use-cases h2, .testimonials h2, .beta h2, .final-cta h2 {
+            text-align: center !important;
+            width: 100% !important;
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            position: relative !important;
+            left: 0 !important;
+            transform: none !important;
+            float: none !important;
+        }
+        
+        h2::after {
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        .benefits-grid, .features-tabs, .testimonials-slider {
+            text-align: left;
+        }
+        
+        .logo {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="logo">Mizuchi</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="#beta" class="btn btn-primary">Get Started</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="tagline-container">
+                        <span class="tag-line emphasized">HARNESS THE WISDOM</span>
+                    </div>
+                    <h1>Transform Financial Chaos <br>Into Crystal-Clear Decisions</h1>
+                    <p class="hero-description">Navigate the markets with confidence as MizuchiAI transforms scattered research into actionable insights, powered by AI that understands your unique investment style.</p>
+                    <div class="cta-buttons">
+                        <a href="#beta" class="btn btn-primary">Join the Beta →</a>
+                        <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+                    </div>
+                    <div class="social-proof">
+                        <div class="counter"><span class="count">250</span>+ investors already organizing their research with Mizuchi</div>
+                        <div class="featured">
+                            <span>Featured in:</span>
+                            <div class="logos">
+                                <!-- Placeholder for publication logos -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- This will be replaced with our animated illustration -->
+                    <div class="dashboard-preview"></div>
+                </div>
+            </div>
+            <div class="wave-bg"></div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits" id="benefits">
+            <div class="container">
+                <h2 class="section-title">Why Investors Choose Mizuchi</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="icon organize-icon"></div>
+                        <h3>Bring Order to Chaos</h3>
+                        <p>From endless tabs to elegant watchlists, Mizuchi organizes your investment research with intelligent categorization and contextual notes that capture your thinking exactly when inspiration strikes.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="icon ai-icon"></div>
+                        <h3>AI That Understands Context</h3>
+                        <p>Ask questions in plain English and receive insights tailored to your portfolio. Mizuchi doesn't just analyze stocks—it understands the context of your research and investment goals.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="icon collab-icon"></div>
+                        <h3>Seamless Collaboration</h3>
+                        <p>Share the journey with partners who matter. Whether it's your spouse or investment club, Mizuchi makes collaboration effortless with real-time updates and focused discussions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">Powerful Features for Serious Investors</h2>
+                <div class="features-tabs">
+                    <div class="tabs-nav">
+                        <button class="tab-btn active" data-tab="watchlists">Smart Watchlists</button>
+                        <button class="tab-btn" data-tab="assistant">Research Assistant</button>
+                        <button class="tab-btn" data-tab="collaboration">Collaborative Research</button>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="watchlists">
+                            <div class="feature-content">
+                                <div class="feature-text">
+                                    <h3>Create watchlists that work for you</h3>
+                                    <p>Organize stocks by sector, strategy, or custom criteria with intelligent tagging that adapts to your research style. Set alerts for price movements, news, or earnings to stay ahead of market developments.</p>
+                                    <ul class="feature-list">
+                                        <li>Intelligent categorization with AI-suggested tags</li>
+                                        <li>Custom views for different research approaches</li>
+                                        <li>Automated alerts for critical events</li>
+                                        <li>One-click import from brokerages and research sites</li>
+                                    </ul>
+                                </div>
+                                <div class="feature-image">
+                                    <!-- Placeholder for feature image -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="assistant">
+                            <div class="feature-content">
+                                <div class="feature-text">
+                                    <h3>Your personal financial analyst</h3>
+                                    <p>Ask questions about companies in your watchlist using natural language. Compare metrics across companies, analyze recent earnings, or get summaries of key developments without digging through endless reports.</p>
+                                    <ul class="feature-list">
+                                        <li>Natural language queries about companies and markets</li>
+                                        <li>Comparative analysis across multiple stocks</li>
+                                        <li>Earnings call and report summaries</li>
+                                        <li>Trend identification across your watchlist</li>
+                                    </ul>
+                                </div>
+                                <div class="feature-image">
+                                    <!-- Placeholder for feature image -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="collaboration">
+                            <div class="feature-content">
+                                <div class="feature-text">
+                                    <h3>Better insights through collaboration</h3>
+                                    <p>Share watchlists with partners or investment clubs while maintaining control over your private notes. Comment on specific stocks, share insights, and track changes to make joint investment decisions with confidence.</p>
+                                    <ul class="feature-list">
+                                        <li>Granular sharing permissions for watchlists</li>
+                                        <li>Comment threads on specific stocks</li>
+                                        <li>Activity tracking for all collaborators</li>
+                                        <li>Voting and consensus tools for investment clubs</li>
+                                    </ul>
+                                </div>
+                                <div class="feature-image">
+                                    <!-- Placeholder for feature image -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- How It Works Section -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <h2 class="section-title">Simplify Your Investment Research in 3 Steps</h2>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Install the Mizuchi Extension</h3>
+                            <p>Add Mizuchi to your browser and gain access to powerful research tools wherever you browse. Our extension works seamlessly with your favorite financial websites.</p>
+                        </div>
+                        <div class="step-image">
+                            <!-- Placeholder for step image -->
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Organize Your Research</h3>
+                            <p>Create watchlists, save articles, and take notes as you research. Mizuchi automatically organizes everything and suggests connections you might have missed.</p>
+                        </div>
+                        <div class="step-image">
+                            <!-- Placeholder for step image -->
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Gain AI-Powered Insights</h3>
+                            <p>Ask questions about your watchlist in plain English and get instant insights. Share your research with partners and make more confident investment decisions.</p>
+                        </div>
+                        <div class="step-image">
+                            <!-- Placeholder for step image -->
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="#beta" class="btn btn-primary">Join the Beta Program →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases Section -->
+        <section class="use-cases" id="use-cases">
+            <div class="container">
+                <h2 class="section-title">Designed for Every Type of Investor</h2>
+                <div class="use-cases-carousel">
+                    <div class="use-case active" id="individual">
+                        <div class="use-case-content">
+                            <div class="use-case-icon individual-icon"></div>
+                            <h3>For the Solo Researcher</h3>
+                            <blockquote>
+                                "I used to have dozens of tabs open and notes scattered everywhere. Now everything is organized in one place, and I can ask questions about my research that would have taken hours to answer before."
+                                <cite>— Alex K., Individual Investor</cite>
+                            </blockquote>
+                            <div class="perfect-for">
+                                <h4>Perfect for:</h4>
+                                <ul>
+                                    <li>Organizing research from multiple sources</li>
+                                    <li>Getting AI-powered insights on your watchlist</li>
+                                    <li>Tracking your investment thesis over time</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="use-case" id="couples">
+                        <div class="use-case-content">
+                            <div class="use-case-icon couples-icon"></div>
+                            <h3>For Partners Managing Wealth Together</h3>
+                            <blockquote>
+                                "My husband and I have different approaches to investing. Mizuchi helps us collaborate without stepping on each other's toes. We can share watchlists but keep our own notes."
+                                <cite>— Sarah & Michael T., Couple Investors</cite>
+                            </blockquote>
+                            <div class="perfect-for">
+                                <h4>Perfect for:</h4>
+                                <ul>
+                                    <li>Sharing watchlists and research notes</li>
+                                    <li>Discussing investment opportunities together</li>
+                                    <li>Tracking joint financial goals and progress</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="use-case" id="clubs">
+                        <div class="use-case-content">
+                            <div class="use-case-icon club-icon"></div>
+                            <h3>For Investment Communities</h3>
+                            <blockquote>
+                                "Our club has 12 members with varying levels of experience. Mizuchi helps us coordinate research efforts and make decisions based on everyone's input."
+                                <cite>— Investment Club Leader</cite>
+                            </blockquote>
+                            <div class="perfect-for">
+                                <h4>Perfect for:</h4>
+                                <ul>
+                                    <li>Coordinating research among club members</li>
+                                    <li>Voting on investment proposals</li>
+                                    <li>Tracking club portfolio performance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-nav">
+                        <button class="carousel-dot active" data-slide="individual"></button>
+                        <button class="carousel-dot" data-slide="couples"></button>
+                        <button class="carousel-dot" data-slide="clubs"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <h2 class="section-title">What Early Users Are Saying</h2>
+                <div class="testimonials-slider">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-mark">❝</div>
+                            <p>Mizuchi has transformed how I research stocks. The AI assistant feels like having a financial analyst at my fingertips, and the organization tools have saved me countless hours.</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">JL</div>
+                                <div class="author-info">
+                                    <h4>Jordan L.</h4>
+                                    <p>Day Trader</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-mark">❝</div>
+                            <p>As someone who invests with my partner, the collaboration features are game-changing. We can finally organize our research in one place while maintaining our individual perspectives.</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">TS</div>
+                                <div class="author-info">
+                                    <h4>Taylor S.</h4>
+                                    <p>Long-term Investor</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-mark">❝</div>
+                            <p>The natural language interface is incredibly intuitive. I can ask complex questions about my watchlist and get insights that would have taken hours to compile manually.</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">AR</div>
+                                <div class="author-info">
+                                    <h4>Alex R.</h4>
+                                    <p>Financial Advisor</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Removed slider nav since all quotes are visible -->
+            </div>
+        </section>
+
+        <!-- Beta Access Section -->
+        <section class="beta" id="beta">
+            <div class="container">
+                <h2>Join the Mizuchi Beta Program</h2>
+                <div class="beta-card">
+                    <div class="beta-content">
+                        <h3>Limited Beta Access</h3>
+                        <p>Be among the first to experience the future of investment research.</p>
+                        <div class="beta-features">
+                            <h4>What you get:</h4>
+                            <ul>
+                                <li>Early access to all features</li>
+                                <li>Influence product development</li>
+                                <li>Exclusive beta community access</li>
+                                <li>Special pricing for early adopters</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="beta-form">
+                        <div class="tally-form">
+                            <a href="https://tally.so/r/w5VXVX" class="btn btn-primary btn-large">Request Beta Access →</a>
+                            <p class="form-note">Click the button above to fill out our quick application form</p>
+                        </div>
+                        <p class="form-disclaimer">By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.<br>We're currently accepting new beta users in batches. We'll notify you when your access is ready.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What makes MizuchiAI different from other investment tools?</h3>
+                            <div class="accordion-icon"></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Unlike traditional stock screeners or research platforms, Mizuchi focuses on organizing your research process and providing AI-powered insights based on your specific context. We don't just provide data—we help you make sense of it in the context of your investment strategy.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How does the AI assistant work?</h3>
+                            <div class="accordion-icon"></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Mizuchi's AI understands the context of your research and investment goals. You can ask questions in plain English about companies in your watchlist, compare metrics across stocks, or get summaries of recent developments. The more you use Mizuchi, the more it learns about your investment style.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is my financial data secure?</h3>
+                            <div class="accordion-icon"></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely. We use bank-level encryption and never store your brokerage credentials. Your research data is encrypted and protected by strict access controls. We're committed to the highest standards of data security and privacy.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can I collaborate with others while keeping some notes private?</h3>
+                            <div class="accordion-icon"></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! Mizuchi offers granular sharing controls. You can share entire watchlists or specific stocks while keeping your private notes confidential. This makes it perfect for couples or investment clubs who want to collaborate while maintaining individual perspectives.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>When will Mizuchi be available to everyone?</h3>
+                            <div class="accordion-icon"></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We're currently in beta with limited access. Join our waitlist to be notified when we open access to more users. Beta users will receive special pricing when we launch publicly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="final-cta">
+            <div class="container">
+                <h2 class="section-title">Ready to Transform Your Investment Research?</h2>
+                <p>Join the growing community of investors who are organizing their research and gaining deeper insights with Mizuchi.</p>
+                <div class="cta-buttons">
+                    <a href="#beta" class="btn btn-primary">Join the Beta Program →</a>
+                    <a href="#features" class="btn btn-secondary">Learn More About Features</a>
+                </div>
+            </div>
+            <div class="dragon-illustration"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wave-divider"></div>
+        <div class="container">
+            <div class="footer-compact">
+                <div class="footer-brand">
+                    <div class="footer-logo">Mizuchi</div>
+                    <p>Empowering investors with the wisdom of Mizuchi, the Japanese water dragon symbolizing prosperity and abundance.</p>
+                    <div class="social-icons">
+                        <a href="https://twitter.com/mizuchiAI" class="social-icon twitter"></a>
+                        <a href="https://linkedin.com/company/mizuchiAI" class="social-icon linkedin"></a>
+                        <a href="https://github.com/mizuchiAI" class="social-icon github"></a>
+                    </div>
+                </div>
+                <div class="footer-links-container">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <ul class="footer-links-list">
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#use-cases">Use Cases</a></li>
+                            <li><a href="#beta">Beta Program</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul class="footer-links-list">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul class="footer-links-list">
+                            <li><a href="#">Terms</a></li>
+                            <li><a href="#">Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 MizuchiAI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MizuchiAI</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Loading Indicator (initially visible) -->
+    <div class="loading-indicator" id="loading-indicator">
+      <div class="spinner"></div>
+      <p>Analyzing company data...</p>
+    </div>
+    
+    <!-- Error Message (initially hidden) -->
+    <div class="error-message" id="error-message"></div>
+    
+    <!-- Auth Section (Initially Hidden) -->
+    <div class="auth-section" id="auth-section">
+      <div class="auth-header">
+        <h2>Sign in to MizuchiAI</h2>
+        <p>Sync your watchlist and notes across devices</p>
+      </div>
+      
+      <div class="auth-form">
+        <div class="form-group">
+          <label for="auth-email">Email</label>
+          <input type="email" id="auth-email" placeholder="Enter your email">
+        </div>
+        
+        <div class="form-group">
+          <label for="auth-password">Password</label>
+          <input type="password" id="auth-password" placeholder="Enter your password">
+        </div>
+        
+        <div class="auth-buttons">
+          <button id="btn-signin" class="btn-primary">Sign In</button>
+          <button id="btn-signup" class="btn-secondary">Sign Up</button>
+        </div>
+        
+        <div class="auth-toggle">
+          <a href="#" id="toggle-auth-mode">Create an account instead</a>
+        </div>
+        
+        <div class="auth-message" id="auth-message"></div>
+      </div>
+    </div>
+    
+    <!-- Stock Info Section (Initially Hidden) -->
+    <div class="stock-info" id="stock-info">
+      <!-- Header Section -->
+      <div class="extension-header">
+        <div class="header-left">
+          <h1>MizuchiAI</h1>
+        </div>
+        <div class="header-right">
+          <div class="user-profile" id="user-profile">
+            <div class="user-avatar" id="user-avatar">?</div>
+            <div class="user-menu" id="user-menu">
+              <div class="user-menu-item" id="menu-account">Account</div>
+              <div class="user-menu-item" id="menu-sync">Sync Data</div>
+              <div class="user-menu-item" id="menu-signout">Sign Out</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Stock Details -->
+      <div class="stock-details">
+        <div class="stock-identity">
+          <div class="stock-symbol-name">
+            <h2 id="stock-symbol">AAPL</h2>
+            <p id="company-name">Apple Inc.</p>
+            <span id="company-tag" class="company-tag">Apple Inc.</span>
+          </div>
+          
+          <div class="stock-price-container">
+            <h2 id="price" class="stock-price-value">$189.84</h2>
+            <p id="price-change" class="price-change positive">+3.51 (1.88%)</p>
+          </div>
+        </div>
+        
+        <div class="stock-actions">
+          <button class="btn-watch" id="btn-watch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5C5.63636 5 2 12 2 12C2 12 5.63636 19 12 19C18.3636 19 22 12 22 12C22 12 18.3636 5 12 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Watch
+          </button>
+          <button class="btn-add-note" id="btn-add-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Add Note
+          </button>
+        </div>
+      </div>
+      
+      <!-- Key Metrics Cards -->
+      <div class="metrics-cards">
+        <div class="metric-card">
+          <p class="metric-label">Market Cap</p>
+          <p class="metric-value" id="market-cap">$2.94T</p>
+        </div>
+        <div class="metric-card">
+          <p class="metric-label">P/E Ratio</p>
+          <p class="metric-value" id="pe-ratio">32.4</p>
+        </div>
+        <div class="metric-card">
+          <p class="metric-label">Dividend</p>
+          <p class="metric-value" id="dividend">0.92%</p>
+        </div>
+      </div>
+      
+      <!-- Tabs Navigation -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="overview">Overview</button>
+        <button class="tab-btn" data-tab="metrics">Key Metrics</button>
+        <button class="tab-btn" data-tab="news">Recent News</button>
+        <button class="tab-btn" data-tab="peers">Peers</button>
+      </div>
+      
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <!-- Overview Tab (Default Active) -->
+        <div class="tab-pane active" id="overview">
+          <!-- AI Summary Section -->
+          <div class="section">
+            <h3 class="section-title">AI Analysis</h3>
+            <p id="ai-summary" class="section-content">Loading AI analysis...</p>
+          </div>
+        </div>
+        
+        <!-- Key Metrics Tab -->
+        <div class="tab-pane" id="metrics">
+          <div class="section">
+            <h3 class="section-title">Key Metrics</h3>
+            <div class="detailed-metrics">
+              <div class="metric-row">
+                <div class="metric-item">
+                  <span class="metric-item-label">Revenue (TTM)</span>
+                  <span class="metric-item-value" id="revenue">$383.93B</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-item-label">EPS (TTM)</span>
+                  <span class="metric-item-value" id="eps">$6.14</span>
+                </div>
+              </div>
+              <div class="metric-row">
+                <div class="metric-item">
+                  <span class="metric-item-label">Revenue Growth</span>
+                  <span class="metric-item-value positive" id="revenue-growth">+7.8%</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-item-label">Net Margin</span>
+                  <span class="metric-item-value" id="net-margin">25.3%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Recent News Tab -->
+        <div class="tab-pane" id="news">
+          <div class="section">
+            <h3 class="section-title">Recent News</h3>
+            <ul class="news-list" id="news-list">
+              <li class="news-item">
+                <div class="news-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7 12H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7 17H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="news-content">
+                  <h4 class="news-title">Loading recent news...</h4>
+                  <div class="news-meta">
+                    <span class="news-source">MizuchiAI</span>
+                    <span class="news-date">Just now</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Peers Tab -->
+        <div class="tab-pane" id="peers">
+          <p class="placeholder-text">Peer comparison data will be available in a future update.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <p>Powered by MizuchiAI 
+        <button id="btn-add-api-keys" class="btn-api-keys">⚙️ API</button>
+        <button id="debug-toggle" class="debug-toggle">Debug</button>
+        <button id="open-platform" class="btn-platform">Open Platform</button>
+      </p>
+    </div>
+    
+    <!-- API Keys Dialog (Hidden by default) -->
+    <div id="api-keys-dialog" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>API Key Configuration</h3>
+          <button id="close-api-dialog" class="close-btn">×</button>
+        </div>
+        <div class="modal-body">
+          <p>Enter your API keys for the services below. These keys will be stored in your browser's local storage.</p>
+          <div class="form-group">
+            <label for="fmp-api-key">Financial Modeling Prep API Key:</label>
+            <input type="text" id="fmp-api-key" placeholder="Your FMP API key">
+          </div>
+          <div class="form-group">
+            <label for="perplexity-api-key">Perplexity API Key:</label>
+            <input type="text" id="perplexity-api-key" placeholder="Your Perplexity API key">
+          </div>
+          <div class="form-group">
+            <label for="mistral-api-key">Mistral API Key:</label>
+            <input type="text" id="mistral-api-key" placeholder="Your Mistral API key">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="save-api-keys" class="btn-primary">Save API Keys</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Debug Panel (Hidden by default) -->
+    <div id="debug-panel" class="debug-panel">
+      <div class="debug-header">
+        <h3>Debug Information</h3>
+        <div>
+          <button id="refresh-logs">Refresh</button>
+          <button id="clear-logs">Clear</button>
+          <button id="copy-logs">Copy</button>
+          <button id="close-debug">Close</button>
+        </div>
+      </div>
+      <div class="debug-content">
+        <div class="debug-section">
+          <h4>Extension Status</h4>
+          <pre id="extension-status">Loading status...</pre>
+        </div>
+        <div class="debug-section">
+          <h4>Debug Logs</h4>
+          <pre id="debug-logs">Loading logs...</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Supabase Client Library -->
+  <script src="supabase.min.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

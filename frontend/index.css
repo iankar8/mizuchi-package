@@ -1,0 +1,166 @@
+
+/* Geist font imports */
+/* Geist Sans Font */
+@import url('https://cdn.jsdelivr.net/npm/geist-font@latest/geist-sans/style.css');
+
+/* Geist Mono Font */
+@import url('https://cdn.jsdelivr.net/npm/geist-font@latest/geist-mono/style.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+}
+
+@layer base {
+  :root {
+    --background: 210 33% 99%; /* Off-white background */
+    --foreground: 210 25% 12%; /* Dark text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 25% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 25% 12%;
+
+    --primary: 210 100% 50%; /* Apple blue */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 210 25% 12%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 210 15% 50%;
+
+    --accent: 210 20% 96%;
+    --accent-foreground: 210 25% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 92%;
+    --input: 210 20% 92%;
+    --ring: 210 100% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 210 25% 12%;
+    --foreground: 210 20% 98%;
+
+    --card: 210 25% 12%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 210 25% 12%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 25% 16%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 210 25% 16%;
+    --muted-foreground: 210 20% 70%;
+
+    --accent: 210 25% 16%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 210 25% 16%;
+    --input: 210 25% 16%;
+    --ring: 212.7 26.8% 83.9%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body {
+    font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    @apply bg-background text-foreground antialiased;
+    text-align: left; /* Set default text alignment to left */
+  }
+
+  /* Typography styles */
+  h1 {
+    @apply text-4xl font-semibold tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold tracking-tight;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold tracking-tight;
+  }
+
+  h4 {
+    @apply text-xl font-semibold tracking-tight;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  small {
+    @apply text-sm text-muted-foreground;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  .glassmorphism {
+    @apply backdrop-blur-md bg-white/80 border border-white/20 shadow-sm;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .chip {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground;
+  }
+  
+  .chip-primary {
+    @apply bg-primary/10 text-primary;
+  }
+  
+  .chip-success {
+    @apply bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400;
+  }
+  
+  .chip-danger {
+    @apply bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400;
+  }
+}
